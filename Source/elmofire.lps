@@ -8,7 +8,8 @@
       <Unit>
         <Filename Value="elmofire.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="18" Y="50"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="18" Y="7"/>
         <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit>
@@ -16,10 +17,8 @@
         <Filename Value="..\RunFormula\runformula.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunFormula"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <UsageCount Value="51"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="..\TEST\META-INF\manifest.xml"/>
@@ -166,6 +165,14 @@
         <CursorPos X="14" Y="54"/>
         <UsageCount Value="11"/>
         <DefaultSyntaxHighlighter Value="Python"/>
+      </Unit>
+      <Unit>
+        <Filename Value="RunFormula\runformula.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RunFormula"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="-1"/>

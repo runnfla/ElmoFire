@@ -4,7 +4,7 @@ library elmofire;
 
 uses cmem, // СТРОГО ПЕРВЫМ!
   SysUtils, Classes,
-  RunFormula in '../RunFormula/runformula.pas';
+  RunFormula in 'RunFormula/runformula.pas';
 
 {$B-}                           // do not complete boolean evaluation
 {$POINTERMATH ON}               // allow use of pointer math
