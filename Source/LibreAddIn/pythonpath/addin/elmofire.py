@@ -3,7 +3,7 @@ import sys
 import ctypes
 import uno
 import unohelper
-from stormray import XElmoFire
+from addins import XElmoFire                      # addins is my unique identificator
 from com.sun.star.sheet import XAddIn
 from com.sun.star.lang import XLocalizable, XServiceName, Locale
 
@@ -19,7 +19,7 @@ class DataRec(ctypes.Structure):
 lib = None
 
 def fast_pack(args):
-    """Высокоскоростная упаковка аргументов в байтовую строку с разделителем ASCII 31"""
+    """High-speed packing of arguments into a byte string with ASCII 0x1F delimiter"""
     return b'\x1f'.join(
         b'""' if a is None or a == "" else
         f'{a}'.encode('utf-8') if type(a) in (int, float) else
@@ -32,14 +32,16 @@ def call_runfla(func_id, flat_args):
 
     try:
         if lib is None:
-            context = uno.getComponentContext()
-            pip = context.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
+            cx = uno.getComponentContext()
+            pip = cx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
             oxt_url = pip.getPackageLocation("addin.elmofire")
             CURRENT_DIR = uno.fileUrlToSystemPath(oxt_url)
 
-            LIB_NAME = "elmofire64.so"
             if sys.platform == "win32":
                 LIB_NAME = "elmofire64.dll"
+            else:
+                LIB_NAME = "elmofire64.so"
+
             LIB_PATH = os.path.join(CURRENT_DIR, LIB_NAME)
 
             if not os.path.exists(LIB_PATH):
@@ -56,19 +58,20 @@ def call_runfla(func_id, flat_args):
             lib.elmo_free_str.argtypes = [ctypes.c_void_p]
             lib.elmo_free_str.restype = None
 
-        # Сопоставляем числовой ID с конкретным методом загруженной библиотеки
-        target_func = lib.elmo_str_py
-        if func_id == 1:
+        # mapping function ID to the specific library method
+        if func_id == 0:
+            target_func = lib.elmo_str_py
+        else:
             target_func = lib.elmo_val_py
 
-        # Быстрая генерация байтового буфера
+        # fast byte buffer generation
         packed_bytes = fast_pack(flat_args)
         packed_data = ctypes.create_string_buffer(packed_bytes)
 
-        # Создаем структуру локально в потоке, а не глобально
+        # create structure locally in thread, not globally
         local_result = DataRec()
 
-        # Вызов функции с передачей указателя на структуру
+        # calling the function and passing a pointer to the structure
         target_func(packed_data, ctypes.byref(local_result))
 
         dtype = local_result.DataType
@@ -82,10 +85,10 @@ def call_runfla(func_id, flat_args):
         elif dtype == 3:
             ptr = local_result.AsPChar
             try:
-                # Прямое чтение из участка памяти
+                # direct memory reading
                 result_str = ctypes.string_at(ptr).decode('utf-8', errors='replace')
             finally:
-                # Защита: гарантируем, что сбой в Lazarus не закроет LibreOffice
+                # ensuring that a library crash won't close LibreCalc
                 try:
                     lib.elmo_free_str(ptr)
                 except Exception:
@@ -126,15 +129,13 @@ class ElmoFire(unohelper.Base, XElmoFire, XAddIn, XServiceName, XLocalizable):
         return ""
 
     def getArgumentDescription(self, aProgrammaticFunctionName, nArgument):
-        return ""
+        return "odd: <variable>, even: <value>, <formula>"
 
     def getProgrammaticCategoryName(self, aProgrammaticFunctionName):
         return "Add-In"
 
     def getDisplayArgumentName(self, aProgrammaticFunctionName, nArgument):
-        if nArgument = 1
-            return "[variable; value;]..[variable; value;] Formula"
-        return ""
+        return "0"
 
     def elmostr(self, *args) -> str:
         return call_runfla(0, args)

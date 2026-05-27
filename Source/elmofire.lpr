@@ -33,6 +33,17 @@ var s : string;
 
 begin
   Result := 0;
+
+
+  with ResStruct^ do begin
+    DataType:=0;
+    AsDouble:=123.34;
+  end;
+
+  exit;
+
+
+
   ResStruct^.DataType:=0;
   if Arg=nil then exit;
   s:=SysUtils.StrPas(Arg); // s может оказаться пустой      Result^.Value.AsPChar := StrNew(PChar(s));

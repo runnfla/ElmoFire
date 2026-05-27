@@ -33,6 +33,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunFormula"/>
       </Unit>
+      <Unit>
+        <Filename Value="RunFormula\runformula.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RunFormula"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

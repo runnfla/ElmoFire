@@ -8,8 +8,10 @@
       <Unit>
         <Filename Value="elmofire.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="18" Y="7"/>
-        <UsageCount Value="59"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="28"/>
+        <CursorPos X="32" Y="39"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -17,7 +19,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunFormula"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="62"/>
       </Unit>
       <Unit>
         <Filename Value="..\TEST\META-INF\manifest.xml"/>
@@ -170,7 +172,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunFormula"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -181,10 +183,10 @@
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\pythonpath\addin\elmofire.py"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos Y="48"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="69"/>
+        <CursorPos X="47" Y="83"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Python"/>
       </Unit>
@@ -197,38 +199,47 @@
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\description.xml"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="3"/>
         <CursorPos X="60" Y="11"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\idl\XElmoFire.idl"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="61" Y="3"/>
-        <UsageCount Value="12"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="14" Y="3"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\META-INF\manifest.xml"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="48" Y="5"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\install.py"/>
-        <EditorIndex Value="5"/>
-        <CursorPos X="18" Y="8"/>
-        <UsageCount Value="12"/>
+        <EditorIndex Value="6"/>
+        <CursorPos X="67" Y="12"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Python"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory HistoryIndex="1">
+      <Position>
+        <Filename Value="LibreAddIn\pythonpath\addin\elmofire.py"/>
+        <Caret Line="97" Column="40" TopLine="78"/>
+      </Position>
+      <Position>
+        <Filename Value="elmofire.lpr"/>
+        <Caret Line="40" Column="22" TopLine="22"/>
+      </Position>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>
