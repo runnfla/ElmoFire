@@ -8,9 +8,8 @@
       <Unit>
         <Filename Value="elmofire.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="18" Y="7"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -18,7 +17,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunFormula"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="59"/>
       </Unit>
       <Unit>
         <Filename Value="..\TEST\META-INF\manifest.xml"/>
@@ -171,8 +170,62 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunFormula"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\ELMOFIRE\ElmoFire\OLDE\LibreExtension\Scripts\elmofire.py"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Python"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LibreAddIn\pythonpath\addin\elmofire.py"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <CursorPos Y="48"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Python"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LibreAddIn\reg.py"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="43" Y="16"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Python"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LibreAddIn\description.xml"/>
+        <EditorIndex Value="6"/>
+        <CursorPos X="60" Y="11"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LibreAddIn\idl\XElmoFire.idl"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="61" Y="3"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LibreAddIn\META-INF\manifest.xml"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="48" Y="5"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LibreAddIn\install.py"/>
+        <EditorIndex Value="5"/>
+        <CursorPos X="18" Y="8"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Python"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="-1"/>

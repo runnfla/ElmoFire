@@ -4,8 +4,8 @@ module stormray {
 
     interface XElmoFire : com::sun::star::uno::XInterface
         {
-            string ElmoStr([in] sequence<any> args);
-            string ElmoVal([in] sequence<any> args);
+            string elmostr([in] sequence<any> args);
+            any elmoval([in] sequence<any> args);
         };
 
 };
