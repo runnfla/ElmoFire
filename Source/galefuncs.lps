@@ -9,7 +9,8 @@
         <Filename Value="galefuncs.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="37" Y="5"/>
+        <TopLine Value="15"/>
+        <CursorPos X="43" Y="19"/>
         <UsageCount Value="52"/>
         <Loaded Value="True"/>
       </Unit>
@@ -24,7 +25,7 @@
       <Unit>
         <Filename Value="LibreAddIn\idl\XGaleFuncs.idl"/>
         <EditorIndex Value="4"/>
-        <CursorPos X="54" Y="11"/>
+        <CursorPos X="3" Y="11"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
@@ -47,7 +48,7 @@
       <Unit>
         <Filename Value="LibreAddIn\description.xml"/>
         <EditorIndex Value="3"/>
-        <CursorPos X="57" Y="7"/>
+        <CursorPos X="24" Y="16"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -70,15 +71,14 @@
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\desc.txt"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="57"/>
         <UsageCount Value="22"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Text"/>
       </Unit>
       <Unit>
         <Filename Value="ExcelAddIn\GaleFuncs.bas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="8"/>
         <CursorPos Y="95"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
@@ -87,7 +87,7 @@
       <Unit>
         <Filename Value="LibreAddIn\pythonpath\galefuncs.py"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="48" Y="7"/>
+        <CursorPos X="30" Y="7"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Python"/>
@@ -95,7 +95,7 @@
       <Unit>
         <Filename Value="..\galefuncs.update.xml"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="53" Y="8"/>
+        <CursorPos X="26" Y="8"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -229,10 +229,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="galefuncs.lpr"/>
-        <Caret Line="115" Column="10" TopLine="103"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
         <Caret Line="186" Column="32" TopLine="177"/>
       </Position>
       <Position>
@@ -346,6 +342,10 @@
       <Position>
         <Filename Value="galefuncs.lpr"/>
         <Caret Line="138" Column="18" TopLine="128"/>
+      </Position>
+      <Position>
+        <Filename Value="LibreAddIn\description.xml"/>
+        <Caret Line="16" Column="24"/>
       </Position>
     </JumpHistory>
     <RunParams>
