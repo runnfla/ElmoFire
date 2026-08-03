@@ -1,14 +1,14 @@
 //*****************************************************
-//  GaleFuncs LibreOffice Add-In
-//  Version 0.1.2
-//  Rev. 7.05.2026
+//  GaleFuncs Add-In for LibreOffice Calc
+//  Version 0.2.1
+//  Rev. 2.08.2026
 
 //  Author: Alexander Torubarov
 //  Contact: runfla@yandex.com
 
 //  Filename: galefuncs.lpr
-//  Source Code: Object Pascal / FreePascal
-//  Compatible: Lazarus 4.2 x64 win10
+//  Source Code: Object Pascal / FPC
+//  Compatible: Lazarus 4.2 x64 win10 linux
 
 //  Copyright (C) 2026 Alexander Torubarov
 //  Licensed under the MIT License.
@@ -17,14 +17,14 @@
 //  for full license information.
 //*****************************************************
 
-// TODO -oGale -cRev.2026.06.01:
+// TODO -oGale -cRev.2026.00.00:
 
 library galefuncs;
 
 {$mode objfpc}{$H+}
 
-uses cmem,                 // must be first
-  SysUtils, Math,
+uses cmem,                // must be first
+  SysUtils, Variants,
   RunFormula in 'RunFormula/runformula.pas';
 
 {$B-}                           // do not complete boolean evaluation
@@ -35,178 +35,161 @@ uses cmem,                 // must be first
 {$inline on}
 
 const
-  SI = SizeOf(SizeInt);
-  ArgSpr = #$1F;
-  GaleErr = 'GaleFuncs Add-In ERROR';
+  QStr = #7;
+  ArgSpr = #$1C;
+  GaleErr = 'GaleFuncs ERROR';
+  OddMsg = ': Number of parameters must be odd';
 
 type
   TDataRec = packed record
     DataType  : integer;          // 4 bytes ctypes.c_int
+    AlignPad  : integer;          // 4 bytes
     AsSizeInt : Int64;            // 8 bytes ctypes.c_int64
     AsDouble  : Double;           // 8 bytes ctypes.c_double
-    AsPChar   : PAnsiChar;        // 8 bytes ctypes.c_char_p
+    AsPChar   : PSizeInt;         // 8 bytes ctypes.c_char_p  point to 0-terminated string
   end;
 
   PDataRec = ^TDataRec;
 
-procedure CopyMem(Src, Dst:PByte; Lng:SizeInt);        //DONE -oGale -cRev.2026.05.29: Proc CopyMem
-var fin : PByte;
-begin
-  fin:=Src+Lng-SI;
-  while Src<=fin do begin
-    PSizeInt(Dst)^:=PSizeInt(Src)^;
-    inc(Dst, SI);
-    inc(Src, SI);
-  end;
-  inc(fin, SI);
-  while Src<fin do begin
-    Dst^:=Src^;
-    inc(Dst);
-    inc(Src);
-  end;
-end;
-
-procedure RetStr(constref S:string; P:PDataRec);       //DONE -oGale -cRev.2026.05.29: Proc RetStr
+procedure StrResult(constref S:string; P:PDataRec);       //DONE -oGale -cRev.2026.08.02: Proc StrResult
 var ansi : PSizeInt;
-    L : SizeInt;
 begin
   ansi:=PSizeInt(S);
   if ansi=nil then exit;
-  L:=ansi[-1]+1;
+  if ansi[-2]>0 then InterlockedIncrement64(ansi[-2]);
   with P^ do begin
-    AsPChar:=GetMem(L);
-    if AsPChar=nil then exit;
-    CopyMem(PByte(ansi), PByte(AsPChar), L);
+    AsPChar:=ansi;
     DataType:=3;
   end;
 end;
 
-function CnvArg(Arg:PChar; out FlaOffs:integer; out Err:boolean):string;
-var fq : PChar = nil;                                  //DONE -oGale -cRev.2026.05.29: Func CnvArg
-    larg : PChar = nil;
-    acnt : integer = 1;
-    L : SizeInt;
-    lq, p, d : PChar;
+function ConvArg(Arg:PChar; out Count, Offs:integer):string;    //DONE -oGale -cRev.2026.08.02: Func ConvArg
+var L : SizeInt;
+    larg, p, d : PChar;
     c : char;
 begin
-  Err:=true;
+  Count:=0;
   p:=Arg;
   L:=StrLen(p);
-  if L=0 then Exit('No parameters');
+  if L=0 then exit;
   SetLength(Result, L);
   d:=PChar(Result);
+  larg:=p-1;
+  Count:=1;
   repeat
     c:=p^;
     case c of
-      #0, ArgSpr : begin
-                     if (acnt and 1)<>0 then begin
-                       if fq=nil then Exit('Parameter '+IntToStr(acnt)+' must be string');
-                       fq^:=#$20;
-                       lq^:=#$20;
-                     end;
-                     if c=#0 then break;
-                     c:='=';
-                     if (acnt and 1)=0 then c:=',';
-                     fq:=nil;
-                     larg:=p;
-                     inc(acnt);
-                   end;
-      '"'        : begin
-                     if fq=nil then fq:=d;
-                     lq:=d;
-                   end;
+      #0     : break;
+      QStr   : if (Count and 1)<>0 then c:=#$20;
+      ArgSpr : begin
+                 c:='=';
+                 if (Count and 1)=0 then c:=',';
+                 larg:=p;
+                 inc(Count);
+               end;
     end;
     d^:=c;
     inc(d);
     inc(p);
   until false;
-  if (acnt and 1)=0 then Exit('Number of parameters must be odd');
-  FlaOffs:=0;
-  if larg<>nil then FlaOffs:=larg-Arg+1;
-  Err:=false;
+  Offs:=larg-Arg+1;
 end;
 
-function gale_str_py(Ptr:PChar; DataRec:PDataRec):integer; cdecl; export;
-var err  : TRunFlaError;                               //DONE -oGale -cRev.2026.05.29: Func gale_str_py
-    mask : TFPUExceptionMask;
-    fla  : string;
-    ofs  : integer;
-    flg  : boolean;
+function MakeErrMsg(var Err:TRunFlaError; Ptr:PChar; Offs:integer):string;
+var s : string;                                           //DONE -oGale -cRev.2026.08.02: Func MakeErrMsg
+    L : integer;
 begin
-  Result:=0;
-  DataRec^.DataType:=0;
-  fla:=CnvArg(Ptr, ofs, flg);
-  if flg then begin
-    RetStr(GaleErr+': '+fla, DataRec);
-    exit;
+  with Err do begin
+    L:=Position-Offs;
+    if L<0 then begin
+      Ptr[Position]:=#0;
+      ConvArg(Ptr, L, Offs);
+      if L=0 then L:=1;
+      s:=' at parameter ';
+    end else s:=' at script position ';
+    Result:=GaleErr+s+IntToStr(L)+': '+RunFlaErrorMsg[Code].ErrMsg;
+    if length(Value)>0 then Result:=Result+' (diag: "'+Value+'")';
   end;
-  mask:=SetExceptionMask([exDenormalized, exUnderflow, exPrecision]);
-  fla:=RunFlaExecStr(RunFlaParse(fla, err), err);
-  SetExceptionMask(mask);
-  with err do if Code<>OK then begin
-    fla:=GaleErr+' at formula position '+IntToStr(Position-ofs)+': '+RunFlaErrorMsg[Code].ErrMsg;
-    // if length(Value)>0 then fla:=fla+' (inf "'+Value+'")';
-  end;
-  RetStr(fla, DataRec);
 end;
 
-function gale_val_py(Ptr:PChar; DataRec:PDataRec):integer; cdecl; export;
-var err  : TRunFlaError;                               //DONE -oGale -cRev.2026.05.29: Func gale_val_py
-    mask : TFPUExceptionMask;
-    fla  : string;
-    vrt  : Variant;
-    ofs  : integer;
-    flg  : boolean;
+function gale_str_py(Ptr:PChar; RStruc:PDataRec):integer; cdecl; export;
+var err : TRunFlaError;                               //DONE -oGale -cRev.2026.08.02: Func gale_str_py
+    s : string;
+    cnt, ofs : integer;
 begin
   Result:=0;
-  DataRec^.DataType:=0;
-  fla:=CnvArg(Ptr, ofs, flg);
-  if flg then begin
-    RetStr(GaleErr+': '+fla, DataRec);
+  RStruc^.DataType:=0;
+  s:=ConvArg(Ptr, cnt, ofs);
+  if (cnt and 1)=0 then begin
+    StrResult(GaleErr+OddMsg, RStruc);
     exit;
   end;
-  mask:=SetExceptionMask([exDenormalized, exUnderflow, exPrecision]);
-  vrt:=RunFlaExecVrt(RunFlaParse(fla, err), err);
-  SetExceptionMask(mask);
-  with err do if Code<>OK then begin
-    fla:=GaleErr+' at formula position '+IntToStr(Position-ofs)+': '+RunFlaErrorMsg[Code].ErrMsg;
-    // if length(Value)>0 then fla:=fla+' (inf "'+Value+'")';
-    RetStr(fla, DataRec);
+{$ifdef UNIX}
+  HookSignal(RTL_SIGDEFAULT);
+{$endif}
+  s:=RunFlaExecStr(RunFlaParse(s, err), err);
+{$ifdef UNIX}
+  UnHookSignal(RTL_SIGDEFAULT);
+{$endif}
+  if err.Code<>OK then s:=MakeErrMsg(err, Ptr, ofs);
+  StrResult(s, RStruc);
+end;
+
+function gale_val_py(Ptr:PChar; RStruc:PDataRec):integer; cdecl; export;
+var err : TRunFlaError;                               //DONE -oGale -cRev.2026.08.02: Func gale_val_py
+    s : string;
+    v : Variant;
+    cnt, ofs : integer;
+begin
+  Result:=0;
+  RStruc^.DataType:=0;
+  s:=ConvArg(Ptr, cnt, ofs);
+  if (cnt and 1)=0 then begin
+    StrResult(GaleErr+OddMsg, RStruc);
+    exit;
   end;
-  with DataRec^ do case PVarData(@vrt)^.vtype of
+{$ifdef UNIX}
+  HookSignal(RTL_SIGDEFAULT);
+{$endif}
+  v:=RunFlaExecVrt(RunFlaParse(s, err), err);
+{$ifdef UNIX}
+  UnHookSignal(RTL_SIGDEFAULT);
+{$endif}
+  if err.Code=OK then with RStruc^ do case PVarData(@v)^.vtype of
     varDouble : begin
-                  AsDouble:=PVarData(@vrt)^.vdouble;
+                  AsDouble:=PVarData(@v)^.vdouble;
                   DataType:=2;
                 end;
     varByte   : begin
-                  AsSizeInt:=PVarData(@vrt)^.vbyte;
+                  AsSizeInt:=PVarData(@v)^.vbyte;
                   DataType:=1;
                 end;
     varInt64  : begin
-                  AsSizeInt:=PVarData(@vrt)^.vint64;
+                  AsSizeInt:=PVarData(@v)^.vint64;
                   DataType:=1;
                 end;
-    varString : RetStr(string(PVarData(@vrt)^.vstring), DataRec);
-  end;
+    varString : StrResult(string(PVarData(@v)^.vstring), RStruc);
+  end else StrResult(MakeErrMsg(err, Ptr, ofs), RStruc);
 end;
 
-function gale_free_py(Ptr:PChar):integer; cdecl; export;       //DONE -oGale -cRev.2026.06.01: Func gale_free_py
+function gale_free_py(Ptr:PSizeInt):integer; cdecl; export;   //DONE -oGale -cRev.2026.08.02: Func gale_free_py
 begin
-  FreeMem(Ptr);
   Result:=0;
+  if Ptr[-2]<0 then exit;
+  if Ptr[-2]=1 then FreeMem(Ptr-3) else InterlockedDecrement64(Ptr[-2]);
 end;
 
-function gale_str_vba(Ptr:PChar; DataRec:PDataRec):integer; stdcall; export;
-begin                                                          //DONE -oGale -cRev.2026.06.01: Func gale_str_vba
-  Result:=gale_str_py(Ptr, DataRec);
+function gale_str_vba(Ptr:PChar; RStruc:PDataRec):integer; stdcall; export;
+begin                                                          //DONE -oGale -cRev.2026.08.02: Func gale_str_vba
+  Result:=gale_str_py(Ptr, RStruc);
 end;
 
-function gale_val_vba(Ptr:PChar; DataRec:PDataRec):integer; stdcall; export;
-begin                                                          //DONE -oGale -cRev.2026.06.01: Func gale_val_vba
-  Result:=gale_val_py(Ptr, DataRec);
+function gale_val_vba(Ptr:PChar; RStruc:PDataRec):integer; stdcall; export;
+begin                                                          //DONE -oGale -cRev.2026.08.02: Func gale_val_vba
+  Result:=gale_val_py(Ptr, RStruc);
 end;
 
-function gale_free_vba(Ptr:PChar):integer; stdcall; export;    //DONE -oGale -cRev.2026.06.01: Func gale_free_vba
+function gale_free_vba(Ptr:PSizeInt):integer; stdcall; export;    //DONE -oGale -cRev.2026.08.02: Func gale_free_vba
 begin
   Result:=gale_free_py(Ptr);
 end;

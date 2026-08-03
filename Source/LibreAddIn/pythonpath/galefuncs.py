@@ -1,7 +1,7 @@
 #*****************************************************
-#  GaleFuncs LibreOffice Add-In
-#  Version 0.1.2
-#  Rev. 7.06.2026
+#  GaleFuncs Add-In for LibreOffice Calc
+#  Version 0.2.1
+#  Rev. 2.08.2026
 
 #  Author: Alexander Torubarov
 #  Contact: runfla@yandex.com
@@ -31,6 +31,7 @@ class DataRec(ctypes.Structure):
     _pack_ = 1
     _fields_ = [
         ("DataType",  ctypes.c_int),        # 4 bytes
+        ("AlignPad",  ctypes.c_int),        # 4 bytes
         ("AsSizeInt", ctypes.c_int64),      # 8 bytes
         ("AsDouble",  ctypes.c_double),     # 8 bytes
         ("AsPChar",   ctypes.c_void_p)      # 8 bytes pointer
@@ -39,16 +40,13 @@ class DataRec(ctypes.Structure):
 lib = None
 
 def fast_pack(args):
-    """Flattens the guaranteed 2D Calc tuple and joins elements using 0x1F.
-       Total check for any empty objects (None, empty tuples, empty strings)."""
-    return b'\x1f'.join(
-  #      b'""' if cell is None or not cell or str(cell).strip() == "" or str(cell) == "()" else
-        b'""' if not cell else
+    return b'\x1c'.join(
+        b'\x07\x07' if cell is None or cell == "" or cell == () else
         (
             f'{int(cell)}'.encode('utf-8') if isinstance(cell, float) and cell.is_integer() else
             f'{cell}'.encode('utf-8')
-        ) if isinstance(cell, (int, float)) and not isinstance(cell, bool) else
-        f'"{cell}"'.encode('utf-8')
+        ) if isinstance(cell, (int, float)) else
+        f'\x07{cell}\x07'.encode('utf-8')
         for row in args
         for cell in row
     )
@@ -71,7 +69,7 @@ def call_runfla(func_id, flat_args):
             LIB_PATH = os.path.join(CURRENT_DIR, LIB_NAME)
 
             if not os.path.exists(LIB_PATH):
-                raise RuntimeError(f"Library {LIB_NAME} not found at {LIB_PATH}")
+                raise RuntimeError(f"Library {LIB_NAME} is not found at {LIB_PATH}")
 
             lib = ctypes.CDLL(LIB_PATH)
 
@@ -109,31 +107,26 @@ def call_runfla(func_id, flat_args):
             return float(local_result.AsDouble)
 
         elif dtype == 3:
-            ptr = local_result.AsPChar
-            try:
-                # direct memory reading
-                result_str = ctypes.c_char_p(ptr).value.decode('utf-8')
-            finally:
-                # ensuring that a library crash won't close LibreCalc
-                try:
-                    lib.gale_free_py(ptr)
-                except Exception:
-                    pass
-
+            ptr = ctypes.c_char_p(local_result.AsPChar)
+            result_str = ptr.value.decode('utf-8')
+            lib.gale_free_py(ptr)
             return result_str
 
         return ""
 
     except Exception as err:
-        return f"GaleFuncs Add-In ERROR: {str(err)}"
+        return f"GaleFuncs ERROR: {str(err)}"
 
 class GaleFuncs(unohelper.Base, XGaleFuncs, XAddIn, XServiceName, XLocalizable):
     def __init__(self, ctx):
         self.ctx = ctx
-        self.locale = Locale("en","US", "")
+        self.locale = Locale("en", "US", "")
 
     def getServiceName(self):
-        return "GaleFuncs unit-aware scripting engine"
+        return "com.sun.star.sheet.AddIn"
+
+    def getImplementationName(self):
+        return "addin.runfla.galefuncs"
 
     def setLocale(self, locale):
         self.locale = locale
@@ -149,13 +142,13 @@ class GaleFuncs(unohelper.Base, XGaleFuncs, XAddIn, XServiceName, XLocalizable):
 
     def getFunctionDescription(self , aProgrammaticName):
         if aProgrammaticName == "galestr":
-            return "Run Formula and returns a string with units"
+            return "Run the script and return a string with units"
         elif aProgrammaticName == "galeval":
-            return "Run Formula and returns a value without units"
+            return "Run the script and return a value without units"
         return ""
 
     def getArgumentDescription(self, aProgrammaticFunctionName, nArgument):
-        return "odd: <variable>, even: <value>, <formula>"
+        return "odd: <variable>, even: <value>, <script>"
 
     def getProgrammaticCategoryName(self, aProgrammaticFunctionName):
         return "Add-In"
@@ -163,7 +156,7 @@ class GaleFuncs(unohelper.Base, XGaleFuncs, XAddIn, XServiceName, XLocalizable):
     def getDisplayArgumentName(self, aProgrammaticFunctionName, nArgument):
         return "0"
 
-    def galestr(self, *args) -> str:
+    def galestr(self, *args):
         return call_runfla(0, args)
 
     def galeval(self, *args):

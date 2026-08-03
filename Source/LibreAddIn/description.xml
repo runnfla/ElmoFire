@@ -5,7 +5,7 @@
              xmlns:xlink="http://www.w3.org/1999/xlink">
 
 <identifier value="addin.runfla.galefuncs" />
-<version value="0.1.2" />
+<version value="0.2.1" />
 <platform value="windows_x86_64,linux_x86_64" />
 
 <display-name>
