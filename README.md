@@ -1,13 +1,13 @@
 # GaleFuncs Add-In
 
-The GaleFuncs Add-In is an extension for LibreOffice Calc and Microsoft Excel powered by the [RunFormula](https://github.com/runnfla/RunFormula) scripting engine. It allows you to evaluate mathematical expressions and formulas with physical unit awareness, without creating macros. Expressions and short scripts are written directly inside spreadsheet cells. The [RunFormula](https://github.com/runnfla/RunFormula) syntax is fully supported.
+The GaleFuncs Add-In is an extension for LibreOffice Calc and Microsoft Excel powered by the [RunFormula](https://github.com/runnfla/RunFormula) scripting engine. It allows you to evaluate mathematical expressions, including calculations with physical units, without macros. Expressions and short scripts are written directly inside spreadsheet cells. The [RunFormula](https://github.com/runnfla/RunFormula) syntax is fully supported.
 
 With GaleFuncs, you can:
-* Perform evaluations with complex numbers and intervals
-* Use conditional statements, loops, and user-defined functions
-* Check physical dimensions at every operation
-* Automatically determine the unit of measurement for the final result
-* Convert values between different unit systems
+* Use scripting language with conditional statements, loops, and user-defined functions;
+* Perform evaluations with complex numbers and intervals;
+* Check physical dimensions at every operation;
+* Automatically determine the unit of measurement for the final result;
+* Convert values between different unit systems.
 
 **Compatibility**\
 \- LibreOffice Calc x86‑64 on Windows and Linux\
@@ -33,12 +33,12 @@ With GaleFuncs, you can:
 **How to use**\
 After installing the add‑in, two new functions will become available in your spreadsheet: GALESTR() and GALEVAL(). They have the same parameters.\
 The GALESTR() function returns a text string containing the calculated result, including units of measurement if applicable.\
-The GALEVAL() function returns a raw, dimensionless number (or string) suitable for further calculations.\
-Parameters are passed in the following order: first, the variables used in the formula and their values are specified in pairs, followed by the formula (expression or script) itself at the end.
+The GALEVAL() function returns a raw, dimensionless number (or string, if the result is a string) suitable for further calculations.\
+Parameters are passed in the following order: first, the variables used in the script and their values are specified in pairs, followed by the script (expression) itself at the end.
 
 `GALESTR/GALEVAL([variable1, value1,]...[variableN, valueN,] script)`
 
-The number of variables is unlimited. Variables may be omitted (i.e., you can pass just the formula). All parameters are separated by commas/semicolons. If the text of a variable, value, or formula is provided directly in the parameters of the GALESTR/GALEVAL functions, it must be enclosed in double quotation marks.
+The number of variables is unlimited. Variables may be omitted (i.e., you can pass just the script). If the text of a variable, value or script is provided directly in the parameters of the GALESTR/GALEVAL functions, it must be enclosed in double quotation marks.
 
 **Example**
 ```
