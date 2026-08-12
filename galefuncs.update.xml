@@ -5,14 +5,14 @@
              xmlns:xlink="https://www.w3.org/1999/xlink">
 
 <identifier value="addin.runfla.galefuncs" />
-<version value="0.1.2" />
+<version value="0.2.1" />
 
 <update-download>
-  <src xlink:href="http://my.company.com/product/download/extension.oxt" />
+  <src xlink:href="https://github.com/runnfla/GaleFuncs/raw/refs/heads/main/Add-In/GaleFuncs-0.2.1.oxt" />
 </update-download>
 
 <update-website>
-  <src xlink:href="http://my.company.com/product/download_en.html" lang="en" />
+  <src xlink:href="https://github.com/runnfla/GaleFuncs/tree/main/Add-In" lang="en" />
 </update-website>
 
 <publisher>
@@ -20,7 +20,7 @@
 </publisher>
 
 <release-notes>
-  <src xlink:href="http://my.company.com/product/release-notes_en.txt" lang="en" />
+  <src xlink:href="" lang="en" />
 </release-notes>
 
 </description>
