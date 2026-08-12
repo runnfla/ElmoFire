@@ -5,10 +5,10 @@
              xmlns:xlink="https://www.w3.org/1999/xlink">
 
 <identifier value="addin.runfla.galefuncs" />
-<version value="0.2.1" />
+<version value="0.2.0" />
 
 <update-download>
-  <src xlink:href="http://github.com/runnfla/GaleFuncs/raw/main/Add-In/GaleFuncs-0.2.1.oxt" />
+  <src xlink:href="https://github.com/runnfla/GaleFuncs/raw/refs/heads/main/Add-In/GaleFuncs-0.2.1.oxt" />
 </update-download>
 
 <update-website>
