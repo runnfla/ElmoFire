@@ -9,9 +9,8 @@
         <Filename Value="galefuncs.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="15"/>
-        <CursorPos X="43" Y="19"/>
-        <UsageCount Value="52"/>
+        <CursorPos X="55" Y="7"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -20,20 +19,20 @@
         <UnitName Value="RunFormula"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="52"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="59"/>
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\idl\XGaleFuncs.idl"/>
         <EditorIndex Value="4"/>
         <CursorPos X="3" Y="11"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\META-INF\manifest.xml"/>
         <EditorIndex Value="5"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
@@ -49,7 +48,7 @@
         <Filename Value="LibreAddIn\description.xml"/>
         <EditorIndex Value="3"/>
         <CursorPos X="24" Y="16"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
@@ -57,7 +56,7 @@
         <Filename Value="LibreAddIn\install.py"/>
         <EditorIndex Value="6"/>
         <CursorPos Y="11"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Python"/>
       </Unit>
@@ -65,7 +64,7 @@
         <Filename Value="LibreAddIn\compile_idl.bat"/>
         <EditorIndex Value="7"/>
         <CursorPos X="36" Y="3"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Bat"/>
       </Unit>
@@ -80,7 +79,7 @@
         <Filename Value="ExcelAddIn\GaleFuncs.bas"/>
         <EditorIndex Value="8"/>
         <CursorPos Y="95"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
@@ -88,7 +87,7 @@
         <Filename Value="LibreAddIn\pythonpath\galefuncs.py"/>
         <EditorIndex Value="2"/>
         <CursorPos X="30" Y="7"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Python"/>
       </Unit>
@@ -96,7 +95,7 @@
         <Filename Value="..\galefuncs.update.xml"/>
         <EditorIndex Value="1"/>
         <CursorPos X="26" Y="8"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
@@ -229,30 +228,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="galefuncs.lpr"/>
-        <Caret Line="186" Column="32" TopLine="177"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
-        <Caret Line="179" Column="18" TopLine="163"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
-        <Caret Line="112" Column="25" TopLine="16"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
-        <Caret Line="144" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
-        <Caret Line="113" Column="8" TopLine="103"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
-        <Caret Line="184" Column="42" TopLine="159"/>
-      </Position>
-      <Position>
-        <Filename Value="galefuncs.lpr"/>
         <Caret Line="152" Column="15" TopLine="139"/>
       </Position>
       <Position>
@@ -346,6 +321,30 @@
       <Position>
         <Filename Value="LibreAddIn\description.xml"/>
         <Caret Line="16" Column="24"/>
+      </Position>
+      <Position>
+        <Filename Value="galefuncs.lpr"/>
+        <Caret Line="54" TopLine="48"/>
+      </Position>
+      <Position>
+        <Filename Value="galefuncs.lpr"/>
+        <Caret Line="23" Column="27" TopLine="15"/>
+      </Position>
+      <Position>
+        <Filename Value="galefuncs.lpr"/>
+        <Caret Line="76" Column="4" TopLine="53"/>
+      </Position>
+      <Position>
+        <Filename Value="galefuncs.lpr"/>
+        <Caret Line="55" Column="24" TopLine="42"/>
+      </Position>
+      <Position>
+        <Filename Value="galefuncs.lpr"/>
+        <Caret Line="129" Column="72" TopLine="118"/>
+      </Position>
+      <Position>
+        <Filename Value="galefuncs.lpr"/>
+        <Caret Line="133" Column="32" TopLine="121"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -1,7 +1,7 @@
 //*****************************************************
 //  GaleFuncs Add-In for LibreOffice Calc
 //  Version 0.2.1
-//  Rev. 2.08.2026
+//  Rev. 11.08.2026
 
 //  Author: Alexander Torubarov
 //  Contact: runfla@yandex.com
@@ -51,6 +51,32 @@ type
 
   PDataRec = ^TDataRec;
 
+procedure Pos2Row(P:PChar; Pos:integer; out Row, Col:SizeInt);
+begin                                                     //DONE -oGale -cRev.2026.08.11: Proc Pos2Row
+  Row:=1;
+  Col:=1;
+  if P=nil then exit;
+  repeat
+    if Pos=0 then exit;
+    case P^ of
+      #0 : exit;
+      #$D, #$A : begin
+                   case PWord(P)^ of
+                     $0D0A, $0A0D : if abs(Pos)>1 then begin
+                                      inc(P);
+                                      dec(Pos);
+                                    end;
+                   end;
+                   inc(Row);
+                   Col:=0;
+                 end;
+    end;
+    inc(P);
+    dec(Pos);
+    inc(Col);
+  until false;
+end;
+
 procedure StrResult(constref S:string; P:PDataRec);       //DONE -oGale -cRev.2026.08.02: Proc StrResult
 var ansi : PSizeInt;
 begin
@@ -63,7 +89,7 @@ begin
   end;
 end;
 
-function ConvArg(Arg:PChar; out Count, Offs:integer):string;    //DONE -oGale -cRev.2026.08.02: Func ConvArg
+function ConvArg(Arg:PChar; out Count, Offs:SizeInt):string;    //DONE -oGale -cRev.2026.08.02: Func ConvArg
 var L : SizeInt;
     larg, p, d : PChar;
     c : char;
@@ -92,36 +118,39 @@ begin
     inc(d);
     inc(p);
   until false;
-  Offs:=larg-Arg+1;
+  Offs:=larg-Arg+2;
 end;
 
-function MakeErrMsg(var Err:TRunFlaError; Ptr:PChar; Offs:integer):string;
-var s : string;                                           //DONE -oGale -cRev.2026.08.02: Func MakeErrMsg
-    L : integer;
+function MakeErrMsg(var Err:TRunFlaError; Ptr:PChar; Offs:SizeInt):string;
+var s : string;                                           //DONE -oGale -cRev.2026.08.11: Func MakeErrMsg
+    r, c : SizeInt;
 begin
   with Err do begin
-    L:=Position-Offs;
-    if L<0 then begin
+    if Position>=Offs then begin
+      Pos2Row(Ptr, Position, r, c);
+      if r=1 then dec(c, Offs);
+      s:=' in script (row '+IntToStr(r)+', pos '+IntToStr(c)+')';
+    end else begin
       Ptr[Position]:=#0;
-      ConvArg(Ptr, L, Offs);
-      if L=0 then L:=1;
-      s:=' at parameter ';
-    end else s:=' at script position ';
-    Result:=GaleErr+s+IntToStr(L)+': '+RunFlaErrorMsg[Code].ErrMsg;
+      ConvArg(Ptr, r, Offs);
+      if r=0 then r:=1;
+      s:=' in parameter '+IntToStr(r);
+    end;
+    Result:=GaleErr+s+': '+RunFlaErrorMsg[Code].ErrMsg;
     if length(Value)>0 then Result:=Result+' (diag: "'+Value+'")';
   end;
 end;
 
-function gale_str_py(Ptr:PChar; RStruc:PDataRec):integer; cdecl; export;
+function gale_str_py(Ptr:PChar; PRec:PDataRec):integer; cdecl; export;
 var err : TRunFlaError;                               //DONE -oGale -cRev.2026.08.02: Func gale_str_py
     s : string;
-    cnt, ofs : integer;
+    cnt, ofs : SizeInt;
 begin
   Result:=0;
-  RStruc^.DataType:=0;
+  PRec^.DataType:=0;
   s:=ConvArg(Ptr, cnt, ofs);
   if (cnt and 1)=0 then begin
-    StrResult(GaleErr+OddMsg, RStruc);
+    StrResult(GaleErr+OddMsg, PRec);
     exit;
   end;
 {$ifdef UNIX}
@@ -132,20 +161,20 @@ begin
   UnHookSignal(RTL_SIGDEFAULT);
 {$endif}
   if err.Code<>OK then s:=MakeErrMsg(err, Ptr, ofs);
-  StrResult(s, RStruc);
+  StrResult(s, PRec);
 end;
 
-function gale_val_py(Ptr:PChar; RStruc:PDataRec):integer; cdecl; export;
+function gale_val_py(Ptr:PChar; PRec:PDataRec):integer; cdecl; export;
 var err : TRunFlaError;                               //DONE -oGale -cRev.2026.08.02: Func gale_val_py
     s : string;
     v : Variant;
-    cnt, ofs : integer;
+    cnt, ofs : SizeInt;
 begin
   Result:=0;
-  RStruc^.DataType:=0;
+  PRec^.DataType:=0;
   s:=ConvArg(Ptr, cnt, ofs);
   if (cnt and 1)=0 then begin
-    StrResult(GaleErr+OddMsg, RStruc);
+    StrResult(GaleErr+OddMsg, PRec);
     exit;
   end;
 {$ifdef UNIX}
@@ -155,7 +184,7 @@ begin
 {$ifdef UNIX}
   UnHookSignal(RTL_SIGDEFAULT);
 {$endif}
-  if err.Code=OK then with RStruc^ do case PVarData(@v)^.vtype of
+  if err.Code=OK then with PRec^ do case PVarData(@v)^.vtype of
     varDouble : begin
                   AsDouble:=PVarData(@v)^.vdouble;
                   DataType:=2;
@@ -168,8 +197,8 @@ begin
                   AsSizeInt:=PVarData(@v)^.vint64;
                   DataType:=1;
                 end;
-    varString : StrResult(string(PVarData(@v)^.vstring), RStruc);
-  end else StrResult(MakeErrMsg(err, Ptr, ofs), RStruc);
+    varString : StrResult(string(PVarData(@v)^.vstring), PRec);
+  end else StrResult(MakeErrMsg(err, Ptr, ofs), PRec);
 end;
 
 function gale_free_py(Ptr:PSizeInt):integer; cdecl; export;   //DONE -oGale -cRev.2026.08.02: Func gale_free_py
