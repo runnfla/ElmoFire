@@ -14,7 +14,7 @@ With GaleFuncs, you can:
 \- Microsoft Excel 64-bit on Windows
 
 **Installation in LibreOffice Calc**\
-1\. Download the `GaleFuncs-*.oxt` file from the [Add-In](https://github.com/runnfla/GaleFuncs/tree/main/Add-In) directory (or from the official [LibreOffice Extensions & Templates Repository](https://extensions.libreoffice.org/en/extensions/show/99599)\
+1\. Download the `GaleFuncs-*.oxt` file from the [Add-In](https://github.com/runnfla/GaleFuncs/tree/main/Add-In) directory (or from the official [LibreOffice Extensions & Templates Repository](https://extensions.libreoffice.org/en/extensions/show/99599))\
 2\. In LibreOffice Calc, go to **Tools \-\-> Extensions**\
 3\. In the **Extensions** manager window, click the **Add** button\
 4\. Select the downloaded `.oxt` file and click **Open**\
