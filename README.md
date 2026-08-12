@@ -33,7 +33,7 @@ With GaleFuncs, you can:
 **How to use**\
 After installing the add‑in, two new functions will become available in your spreadsheet: GALESTR() and GALEVAL(). They have the same parameters.\
 The GALESTR() function returns a text string containing the calculated result, including units of measurement if applicable.\
-The GALEVAL() function returns a raw, dimensionless number (or string, if the result is a string) suitable for further calculations.\
+The GALEVAL() function returns a raw, dimensionless number (or string, if result is a string) suitable for further calculations.\
 Parameters are passed in the following order: first, the variables used in the script and their values are specified in pairs, followed by the script (expression) itself at the end.
 
 `GALESTR/GALEVAL([variable1, value1,]...[variableN, valueN,] script)`
