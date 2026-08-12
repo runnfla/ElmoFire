@@ -7,9 +7,9 @@
 <identifier value="addin.runfla.galefuncs" />
 <version value="0.2.1" />
 
-<update-download>
-  <src xlink:href="https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key=https://disk.yandex.ru/d/3p3EyYwfgzfo3A" />
-</update-download>
+<update-website>
+  <src xlink:href="https://github.com/runnfla/GaleFuncs/Add-In" lang="en" />
+</update-website>
 
 <publisher>
   <name xlink:href="https://github.com/runnfla/GaleFuncs" lang="en">A.Torubarov</name>
