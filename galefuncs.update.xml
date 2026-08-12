@@ -7,9 +7,10 @@
 <identifier value="addin.runfla.galefuncs" />
 <version value="0.2.1" />
 
-<update-website>
-  <src xlink:href="https://github.com/runnfla/GaleFuncs/Add-In" lang="en" />
-</update-website>
+<update-download>
+  <src xlink:href="http://stormray.narod.ru/GaleFuncs-0.2.1.oxt" />
+  <src xlink:href="https://stormray.narod.ru/GaleFuncs-0.2.1.oxt" />
+</update-download>
 
 <publisher>
   <name xlink:href="https://github.com/runnfla/GaleFuncs" lang="en">A.Torubarov</name>
