@@ -36,7 +36,7 @@ The GALESTR() function returns a text string containing the calculated result, i
 The GALEVAL() function returns a raw, dimensionless number (or string) suitable for further calculations.\
 Parameters are passed in the following order: first, the variables used in the formula and their values are specified in pairs, followed by the formula (expression or script) itself at the end.
 
-`GALESTR/GALEVAL([variable1, value1,]...[variableN, valueN,] formula)`
+`GALESTR/GALEVAL([variable1, value1,]...[variableN, valueN,] script)`
 
 The number of variables is unlimited. Variables may be omitted (i.e., you can pass just the formula). All parameters are separated by commas/semicolons. If the text of a variable, value, or formula is provided directly in the parameters of the GALESTR/GALEVAL functions, it must be enclosed in double quotation marks.
 
