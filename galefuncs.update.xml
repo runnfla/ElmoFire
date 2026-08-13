@@ -8,15 +8,15 @@
 <version value="0.2.1" />
 
 <update-download>
-  <src xlink:href="http://stormray.narod.ru/GaleFuncs-0.2.1.oxt" />
+  <src xlink:href="https://stormray.narod.ru/GaleFuncs-0.2.1.oxt" />
 </update-download>
 
 <publisher>
-  <name xlink:href="http://github.com/runnfla/GaleFuncs" lang="en">A.Torubarov</name>
+  <name xlink:href="https://github.com/runnfla/GaleFuncs" lang="en">A.Torubarov</name>
 </publisher>
 
 <release-notes>
-  <src xlink:href="http://raw.githubusercontent.com/runnfla/GaleFuncs/main/galefuncs.release.txt" />
+  <src xlink:href="https://stormray.narod.ru/galefuncs.release.txt" />
 </release-notes>
 
 </description>
