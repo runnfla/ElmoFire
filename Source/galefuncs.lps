@@ -46,7 +46,6 @@
       <Unit>
         <Filename Value="LibreAddIn\description.xml"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="2"/>
         <CursorPos X="108" Y="24"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
@@ -95,7 +94,7 @@
         <Filename Value="..\galefuncs.update.xml"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="39" Y="8"/>
+        <CursorPos X="61" Y="8"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -236,7 +235,7 @@
       <Unit>
         <Filename Value="..\..\RunFormula\ChangeLog\runflachangelog.txt"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="26"/>
+        <TopLine Value="14"/>
         <CursorPos X="78" Y="51"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
