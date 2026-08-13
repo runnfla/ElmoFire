@@ -9,7 +9,7 @@
         <Filename Value="galefuncs.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="55" Y="7"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -18,7 +18,7 @@
         <UnitName Value="RunFormula"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="52"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="60"/>
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\idl\XGaleFuncs.idl"/>
@@ -45,7 +45,6 @@
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\description.xml"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="2"/>
         <CursorPos X="108" Y="24"/>
@@ -94,8 +93,9 @@
       </Unit>
       <Unit>
         <Filename Value="..\galefuncs.update.xml"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="71" Y="9"/>
+        <CursorPos X="109" Y="19"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -236,7 +236,6 @@
       <Unit>
         <Filename Value="..\..\RunFormula\ChangeLog\runflachangelog.txt"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="14"/>
         <CursorPos X="78" Y="51"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
