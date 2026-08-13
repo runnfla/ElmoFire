@@ -1,0 +1,10 @@
+===== Version 0.2.1 - 11.08.2026 =====
+- Changed: Number-to-string and string-to-number conversions use a Unified
+numeric format without backticks for units
+- Added: New embedded functions - margin(), ball(), arg(), conj(), rect(), floor(),
+ceil(), find(), substr(), hexstr(), unitstr(), pow(), log(), tan()
+- Changed: Embedded functions value(), convert() are renamed to val(), conv()
+- Added: CGS and Astronomical units of measurement
+- Changed: Digit is not allowed immediately after a comma or semicolon, space or
+separator required
+- Added: New constant - MaxInt
