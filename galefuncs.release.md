@@ -3,6 +3,7 @@
 #### ===== Version 0.1.2 - 2026-06-08 =====
 
 \- First public release
+<br><br>
 
 #### ===== Version 0.2.1 - 2026-08-11 =====
 
@@ -12,3 +13,6 @@
 \- Added CGS and Astronomical units of measurement\
 \- Changed syntax: digits are no longer allowed immediately after a comma or a semicolon; a space or separator is required\
 \- Added new constant: MaxInt\
+<br><br>
+
+For more information, see the [help files](https://github.com/runnfla/GaleFuncs/tree/main/Help) and the RunFormula [changelog](https://github.com/runnfla/RunFormula/tree/main/Changelog).
