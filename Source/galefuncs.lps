@@ -76,6 +76,7 @@
       </Unit>
       <Unit>
         <Filename Value="ExcelAddIn\GaleFuncs.bas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="8"/>
         <CursorPos Y="95"/>
         <UsageCount Value="25"/>
@@ -85,6 +86,7 @@
       <Unit>
         <Filename Value="LibreAddIn\pythonpath\galefuncs.py"/>
         <EditorIndex Value="2"/>
+        <TopLine Value="34"/>
         <CursorPos X="38" Y="4"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
@@ -92,7 +94,6 @@
       </Unit>
       <Unit>
         <Filename Value="..\galefuncs.update.xml"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="79" Y="13"/>
         <UsageCount Value="23"/>
