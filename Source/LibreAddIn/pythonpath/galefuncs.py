@@ -39,9 +39,9 @@ class DataRec(ctypes.Structure):
 
 lib = None
 
-def fast_pack(args):
+def arg_pack(args):
     return b'\x1c'.join(
-        b'\x07\x07' if cell is None or cell == "" or cell == () else
+        b'""' if cell is None or cell == "" or cell == () else
         (
             f'{int(cell)}'.encode('utf-8') if isinstance(cell, float) and cell.is_integer() else
             f'{cell}'.encode('utf-8')
@@ -50,6 +50,37 @@ def fast_pack(args):
         for row in args
         for cell in row
     )
+
+
+#import uno
+#from com.sun.star.table.CellContentType import EMPTY, VALUE, TEXT, FORMULA
+
+#def get_clean_cell_value(cell):
+#    cell_type = cell.getType()
+
+    # 1. Если ячейка физически пустая — отдаем None (arg_pack сделает кавычки "")
+#    if cell_type == EMPTY:
+#        return None
+
+    # 2. Если в ячейке текст — берем строку
+#    elif cell_type == TEXT:
+#        return cell.String
+
+    # 3. Если в ячейке число — берем значение (здесь 0.0 будет настоящим нулем)
+#    elif cell_type == VALUE:
+#        return cell.Value
+
+    # 4. Если в ячейке формула — проверяем, ЧТО она вернула (число или строку)
+#    elif cell_type == FORMULA:
+        # Если формула возвращает текст (например, пустую строку "")
+#        if cell.String != "" and not cell.String.replace('.','',1).isdigit():
+#            return cell.String
+        # Иначе берем числовое значение формулы
+#        return cell.Value
+
+#    return None
+
+
 
 def call_runfla(func_id, flat_args):
     global lib
@@ -79,24 +110,20 @@ def call_runfla(func_id, flat_args):
             lib.gale_val_py.argtypes = [ctypes.c_char_p, ctypes.POINTER(DataRec)]
             lib.gale_val_py.restype = ctypes.c_int
 
-            lib.gale_free_py.argtypes = [ctypes.c_char_p]
+            lib.gale_free_py.argtypes = [ctypes.c_void_p]
             lib.gale_free_py.restype = ctypes.c_int
 
         # mapping function ID to the specific library method
         if func_id == 0:
-            target_func = lib.gale_str_py
+            gale_func = lib.gale_str_py
         else:
-            target_func = lib.gale_val_py
-
-        # fast byte buffer generation
-        packed_bytes = fast_pack(flat_args)
-        packed_data = ctypes.create_string_buffer(packed_bytes)
+            gale_func = lib.gale_val_py
 
         # create structure locally in thread, not globally
         local_result = DataRec()
 
         # calling the function and passing a pointer to the structure
-        target_func(packed_data, ctypes.byref(local_result))
+        gale_func(arg_pack(flat_args), ctypes.byref(local_result))
 
         dtype = local_result.DataType
 
@@ -107,9 +134,8 @@ def call_runfla(func_id, flat_args):
             return float(local_result.AsDouble)
 
         elif dtype == 3:
-            ptr = ctypes.c_char_p(local_result.AsPChar)
-            result_str = ptr.value.decode('utf-8')
-            lib.gale_free_py(ptr)
+            result_str = ctypes.c_char_p(local_result.AsPChar).value.decode('utf-8')
+            lib.gale_free_py(local_result.AsPChar)
             return result_str
 
         return ""
