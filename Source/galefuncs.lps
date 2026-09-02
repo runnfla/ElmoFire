@@ -8,7 +8,6 @@
       <Unit>
         <Filename Value="galefuncs.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="54" Y="6"/>
         <UsageCount Value="88"/>
         <Loaded Value="True"/>
@@ -46,8 +45,10 @@
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\description.xml"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <CursorPos X="77" Y="16"/>
+        <TopLine Value="2"/>
+        <CursorPos X="38" Y="18"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
@@ -94,7 +95,7 @@
       <Unit>
         <Filename Value="..\galefuncs.update.xml"/>
         <EditorIndex Value="3"/>
-        <CursorPos X="79" Y="13"/>
+        <CursorPos X="18" Y="10"/>
         <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
