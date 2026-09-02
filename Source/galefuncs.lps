@@ -45,9 +45,7 @@
       </Unit>
       <Unit>
         <Filename Value="LibreAddIn\description.xml"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="2"/>
         <CursorPos X="38" Y="18"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
@@ -94,8 +92,9 @@
       </Unit>
       <Unit>
         <Filename Value="..\galefuncs.update.xml"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <CursorPos X="18" Y="10"/>
+        <CursorPos X="116" Y="14"/>
         <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
