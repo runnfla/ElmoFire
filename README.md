@@ -14,14 +14,14 @@ With GaleFuncs, you can:
 \- Microsoft Excel 64-bit on Windows
 
 **Installation in LibreOffice Calc**\
-1\. Download the `GaleFuncs-<version>.oxt` file from the [Add-In](https://github.com/runnfla/GaleFuncs/tree/main/Add-In) directory or from the official [LibreOffice Extensions & Templates Repository](https://extensions.libreoffice.org/en/extensions/show/99599)\
+1\. Download the `GaleFuncs-<version>.oxt` file from the [Releases](https://github.com/runnfla/GaleFuncs/releases) page or from the official [LibreOffice Extensions & Templates Repository](https://extensions.libreoffice.org/en/extensions/show/99599)\
 2\. In LibreOffice Calc, go to **Tools \-\-> Extensions**\
 3\. In the **Extensions** manager window, click the **Add** button\
 4\. Select the downloaded `.oxt` file and click **Open**\
 5\. Restart LibreOffice Calc for the changes to take effect
 
 **Installation in Microsoft Excel**\
-1\. Download the `GaleFuncs-<version>-Excel.zip` archive from the [Add-In](https://github.com/runnfla/GaleFuncs/tree/main/Add-In) directory\
+1\. Download the `GaleFuncs-<version>-Excel.zip` archive from the [Releases](https://github.com/runnfla/GaleFuncs/releases) page\
 2\. Extract files from the ZIP archive to a convenient and permanent folder on your computer (e.g., `C:\GaleFuncs\`)\
 3\. **Important:** Do not delete or move the `.xlam` and `.dll` files after installation - otherwise, the add-in will stop working\
 4\. Open MS Excel. Click the **File** tab on the Ribbon and select **Options** (at the bottom of the left panel)\
