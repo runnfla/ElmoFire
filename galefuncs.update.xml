@@ -8,6 +8,7 @@
 <version value="0.2.1" />
 
 <update-download>
+  <src xlink:href="https://storage.yandexcloud.net/gale/GaleFuncs-0.2.0-Calc.oxt" />
   <src xlink:href="https://raw.githubusercontent.com/runnfla/GaleFuncs/refs/heads/main/Add-In/GaleFuncs-0.2.1-Calc.oxt" />
 </update-download>
 
