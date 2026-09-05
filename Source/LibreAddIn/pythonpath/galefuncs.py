@@ -1,7 +1,7 @@
 #*****************************************************
 #  GaleFuncs Add-In for LibreOffice Calc
-#  Version 0.2.1
-#  Rev. 2.08.2026
+#  Version 0.2.2
+#  Rev. 5.09.2026
 
 #  Author: Alexander Torubarov
 #  Contact: runfla@yandex.com

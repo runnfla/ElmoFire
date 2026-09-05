@@ -12,7 +12,14 @@
 \- Built-in functions value() and convert() have been renamed to val() and conv()\
 \- Added CGS and Astronomical units of measurement\
 \- Changed syntax: digits are no longer allowed immediately after a comma or a semicolon; a space or separator is required\
-\- Added new constant: MaxInt\
+\- Added new constant: MaxInt
+<br><br>
+
+#### ===== Version 0.2.2 - 2026-09-05 =====
+
+\- Built-in function abs(char) returns an integer value\
+\- Built-in function val() raises an exception instead of returning None\
+\- Added new constant: MinInt
 <br><br>
 
 For more information, see the [help files](https://github.com/runnfla/GaleFuncs/tree/main/Help) and the RunFormula [changelog](https://github.com/runnfla/RunFormula/tree/main/Changelog).
