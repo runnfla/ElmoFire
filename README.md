@@ -27,7 +27,7 @@ With GaleFuncs, you can:
 4\. Open MS Excel. Click the **File** tab on the Ribbon and select **Options** (at the bottom of the left panel)\
 5\. In the **Excel Options** window, select the **Add-Ins** section\
 6\. At the bottom of the window, select **Excel Add-ins** from the **Manage** drop-down list and click **Go**\
-7\. In the **Add-Ins** dialog box, click **Browse**, select the extracted `GaleFuncs Excel.xlam` file and click **OK**\
+7\. In the **Add-Ins** dialog box, click **Browse**, select the extracted `GaleFuncs-<version>-Excel.xlam` file and click **OK**\
 8\. Make sure that the **GaleFuncs Excel** add-in appears in the list and is checked and click **OK**
 
 **How to use**\
