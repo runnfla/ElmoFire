@@ -9,7 +9,7 @@
         <Filename Value="galefuncs.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="40" Y="7"/>
+        <CursorPos X="42" Y="8"/>
         <UsageCount Value="88"/>
         <Loaded Value="True"/>
       </Unit>
@@ -255,7 +255,6 @@
       <Unit>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\ustrings.inc"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1781"/>
         <CursorPos X="42" Y="1799"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
